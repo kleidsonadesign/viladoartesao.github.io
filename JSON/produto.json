@@ -100,5 +100,34 @@
         "foto_artesao": "https://exemplo.com/foto2.jpg"
       }
     ]
+    
   }
-  
+  async function fetchProducts() {
+    try {
+        const response = await fetch('http://localhost:3000/api/products');
+        if (!response.ok) {
+            throw new Error('Erro na rede: ' + response.statusText);
+        }
+        const produtos = await response.json();
+        console.log('Produtos recebidos:', produtos); // Log para ver os produtos recebidos
+        const produtosContainer = document.getElementById('produtos');
+
+        if (produtos.length === 0) {
+            produtosContainer.innerHTML = '<p>Nenhum produto disponível.</p>'; // Mensagem caso não haja produtos
+        } else {
+            produtos.forEach(produto => {
+                const produtoDiv = document.createElement('div');
+                produtoDiv.innerHTML = `
+                    <h3>${produto.nome}</h3>
+                    <p>Preço: R$ ${produto.preco}</p>
+                    <p>${produto.descricao}</p>
+                    <button onclick="addToCart('${produto.nome}', ${produto.preco})">Adicionar ao Carrinho</button>
+                    <a href="product-detail.html?id=${produto.id}">Ver Detalhes</a>
+                `;
+                produtosContainer.appendChild(produtoDiv);
+            });
+        }
+    } catch (error) {
+        console.error('Erro ao buscar produtos:', error);
+    }
+}

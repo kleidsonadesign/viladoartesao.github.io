@@ -35,3 +35,35 @@ function produtospage(){
     })
 }
 
+// Rota para remover um produto do carrinho pelo nome
+app.delete('/cart/:name', (req, res) => {
+    const productName = req.params.name;
+    cart = cart.filter(product => product.name !== productName);
+    res.json({ message: 'Produto removido do carrinho!', cart });
+});
+
+app.listen(PORT, () => {
+    console.log(`Servidor rodando em http://localhost:${PORT}`);
+});
+
+const express = require('express');
+const cors = require('cors'); // Importa o pacote cors
+const app = express();
+const PORT = 3000;
+
+app.use(cors()); // Usa o middleware CORS
+app.use(express.json());
+
+const produtos = [
+    { id: 1, nome: 'Produto A', preco: 50, descricao: 'Descrição do Produto A', imagem: 'url_da_imagem_a' },
+    { id: 2, nome: 'Produto B', preco: 100, descricao: 'Descrição do Produto B', imagem: 'url_da_imagem_b' },
+    { id: 3, nome: 'Produto C', preco: 150, descricao: 'Descrição do Produto C', imagem: 'url_da_imagem_c' }
+];
+
+app.get('/api/products', (req, res) => {
+    res.json(produtos);
+});
+
+app.listen(PORT, () => {
+    console.log(`Servidor rodando na porta ${PORT}`);
+});
