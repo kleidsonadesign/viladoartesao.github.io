@@ -1,5 +1,18 @@
 {
   "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.1",
     "fs": "^0.0.1-security"
-  }
+  },
+  "name": "viladoartesao.github.io-main",
+  "version": "1.0.0",
+  "description": "## - HTML (HyperText Markup Language): Used to structure the content of the website. HTML provides the foundation for web pages, allowing the organization of text, images, and multimedia content to present the artisans and their products in a structured and accessible way.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
